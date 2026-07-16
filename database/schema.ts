@@ -7,17 +7,294 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class BlockSchema extends BaseModel {
+  static $columns = ['blockedId', 'blockerId', 'createdAt', 'id', 'reason', 'updatedAt'] as const
+  $columns = BlockSchema.$columns
+  @column()
+  declare blockedId: number
+  @column()
+  declare blockerId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare reason: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class BookmarkSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'postId', 'updatedAt', 'userId'] as const
+  $columns = BookmarkSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare postId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
+export class ChatParticipantaSchema extends BaseModel {
+  static $columns = ['chatId', 'customName', 'id', 'isMuted', 'joinedAt', 'leftAt', 'role', 'userId'] as const
+  $columns = ChatParticipantaSchema.$columns
+  @column()
+  declare chatId: number
+  @column()
+  declare customName: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isMuted: boolean
+  @column.dateTime()
+  declare joinedAt: DateTime | null
+  @column.dateTime()
+  declare leftAt: DateTime | null
+  @column()
+  declare role: string
+  @column()
+  declare userId: number
+}
+
+export class ChatSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'updatedAt'] as const
+  $columns = ChatSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CommentSchema extends BaseModel {
+  static $columns = ['commentParentId', 'content', 'createdAt', 'id', 'postId', 'updatedAt', 'userId'] as const
+  $columns = CommentSchema.$columns
+  @column()
+  declare commentParentId: number | null
+  @column()
+  declare content: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare postId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class FollowSchema extends BaseModel {
+  static $columns = ['createdAt', 'followerId', 'followingId', 'id', 'updatedAt'] as const
+  $columns = FollowSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare followerId: number
+  @column()
+  declare followingId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class HashtagSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'name', 'updatedAt', 'usageCount'] as const
+  $columns = HashtagSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare usageCount: number
+}
+
+export class LikeSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'postId', 'updatedAt', 'userId'] as const
+  $columns = LikeSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare postId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class MediaSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'order', 'postId', 'type', 'updatedAt'] as const
+  $columns = MediaSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare order: number | null
+  @column()
+  declare postId: number | null
+  @column()
+  declare type: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class MessageSchema extends BaseModel {
+  static $columns = ['chatId', 'content', 'createdAt', 'deletedAt', 'id', 'replyToId', 'senderId', 'type', 'updatedAt'] as const
+  $columns = MessageSchema.$columns
+  @column()
+  declare chatId: number
+  @column()
+  declare content: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare replyToId: number | null
+  @column()
+  declare senderId: number
+  @column()
+  declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class PasswordResetSchema extends BaseModel {
+  static $columns = ['expiresAt', 'id', 'token', 'updatedAt', 'usedAt', 'userId'] as const
+  $columns = PasswordResetSchema.$columns
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare token: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column.dateTime()
+  declare usedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class PostHashtagSchema extends BaseModel {
+  static $columns = ['createdAt', 'hashtagId', 'id', 'postId', 'updatedAt'] as const
+  $columns = PostHashtagSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare hashtagId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare postId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class PostSchema extends BaseModel {
+  static $columns = ['content', 'createdAt', 'datePublication', 'id', 'location', 'postParent', 'updatedAt', 'userId'] as const
+  $columns = PostSchema.$columns
+  @column()
+  declare content: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.date()
+  declare datePublication: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare location: string | null
+  @column()
+  declare postParent: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class ProfileSchema extends BaseModel {
+  static $columns = ['avatar', 'bio', 'cover', 'createdAt', 'displayName', 'id', 'isPrivate', 'isVerified', 'location', 'updatedAt', 'userId', 'username', 'website'] as const
+  $columns = ProfileSchema.$columns
+  @column()
+  declare avatar: string | null
+  @column()
+  declare bio: string | null
+  @column()
+  declare cover: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare displayName: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isPrivate: boolean
+  @column()
+  declare isVerified: boolean
+  @column()
+  declare location: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+  @column()
+  declare username: string
+  @column()
+  declare website: string | null
+}
+
+export class RepostSchema extends BaseModel {
+  static $columns = ['comment', 'createdAt', 'id', 'postId', 'updatedAt', 'userId'] as const
+  $columns = RepostSchema.$columns
+  @column()
+  declare comment: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare postId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'emailVerifiedAt', 'fullName', 'id', 'isVerified', 'otp', 'otpExpiresAt', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
   declare email: string
   @column()
+  declare emailVerifiedAt: string | null
+  @column()
   declare fullName: string | null
   @column({ isPrimary: true })
   declare id: number
+  @column.date()
+  declare isVerified: DateTime
+  @column()
+  declare otp: number | null
+  @column.dateTime()
+  declare otpExpiresAt: DateTime | null
   @column({ serializeAs: null })
   declare password: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
